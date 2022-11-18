@@ -1,9 +1,20 @@
 
+// CSS 
+import './App.css';
+
+// COMPONENTS 
 import Header from './components/Header';
 import Employee from './components/Employee';
 import Footer from './components/Footer';
-import './App.css';
-import { useState, useEffect} from "react"
+import GroupTeamMembers from './components/GroupTeamMembers';
+import Nav from './components/Nav';
+import NotFound from './components/NotFound';
+
+// ESSNTIAL HOOKS 
+import { useState, useEffect} from "react";
+//REACT PACKAGES
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+
 
 function App() {
    // USE STATE  
@@ -138,19 +149,39 @@ function App() {
 
   
   return (
-    <div>
-      <Header selectedTeam = {selectedTeam}
-              teamMemberCount = {employees.filter((employee) => employee.teamName === selectedTeam).length}
-            />
+    <Router>
+         <Nav/>
 
-      <Employee employees = {employees}
-                selectedTeam = {selectedTeam}
-                handleEmployeeCardClick = {handleEmployeeCardClick}
-                handleTeamSelectionChange = {handleTeamSelectionChange}
-            /> 
-      <Footer />
-    </div>
+         <Header selectedTeam = {selectedTeam}
+               teamMemberCount = {employees.filter((employee) => employee.teamName === selectedTeam).length}
+               />
+         <Routes>
+
+            <Route path = "/"
+                  element = {
+                        <Employee employees = {employees}
+                        selectedTeam = {selectedTeam}
+                        handleEmployeeCardClick = {handleEmployeeCardClick}
+                        handleTeamSelectionChange = {handleTeamSelectionChange}
+                        />
+                  }>
+            </Route>     
+            
+            <Route path = "/GoupTeamMembers" element = {<GroupTeamMembers/>}>       
+            </Route>     
+
+            <Route path = "*" element = {<NotFound/>}>       
+            </Route>  
+
+         </Routes>
+        
+
+
+         <Footer />
+
+    </Router>
   );
 }
+
 
 export default App;
