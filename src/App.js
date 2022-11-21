@@ -167,7 +167,12 @@ function App() {
                   }>
             </Route>     
             
-            <Route path = "/GoupTeamMembers" element = {<GroupTeamMembers/>}>       
+            <Route path = "/GoupTeamMembers" element = {
+                                                   <GroupTeamMembers employees = {employees} 
+                                                   selectedTeam = {selectedTeam} 
+                                                   setTeam = {setTeam}
+                                                   />
+                                             }>       
             </Route>     
 
             <Route path = "*" element = {<NotFound/>}>       
